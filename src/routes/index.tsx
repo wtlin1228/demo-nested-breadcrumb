@@ -1,3 +1,4 @@
+import Typography from '@mui/material/Typography';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
@@ -7,7 +8,7 @@ export const Route = createFileRoute('/')({
 function Index() {
   return (
     <div>
-      <h3>Welcome Home!</h3>
+      <Typography variant="h3">Welcome Home!</Typography>
     </div>
   );
 }
