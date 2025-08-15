@@ -3,6 +3,12 @@ import { createFileRoute, Outlet } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/home')({
   component: RouteComponent,
+  onEnter: () => {
+    console.log('Home::onEnter');
+  },
+  onLeave: () => {
+    console.log('Home::onLeave');
+  },
 });
 
 function RouteComponent() {

@@ -5,6 +5,12 @@ export const Route = createFileRoute(
   '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time',
 )({
   component: RouteComponent,
+  onEnter: () => {
+    console.log('LunchTime::onEnter');
+  },
+  onLeave: () => {
+    console.log('LunchTime::onLeave');
+  },
 });
 
 function RouteComponent() {
