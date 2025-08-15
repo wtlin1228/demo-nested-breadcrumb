@@ -11,10 +11,10 @@ export const Route = createRootRoute({
 
     React.useEffect(() => {
       const BRoot = BreadcrumbRoot.getInstance();
-      BRoot.subscribeToGroupsChange(setGroupIds);
-
+      const listener = (xs: string[]) => setGroupIds([...xs]);
+      BRoot.subscribeToGroupsChange(listener);
       return () => {
-        BRoot.unsubscribeToGroupsChange(setGroupIds);
+        BRoot.unsubscribeToGroupsChange(listener);
       };
     }, []);
 

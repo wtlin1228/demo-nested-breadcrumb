@@ -124,10 +124,9 @@ export const BreadcrumbProvider: React.FC<
   }, [props.id]);
 
   React.useEffect(() => {
-    const count = Object.keys(state.items).length;
     const BRoot = BreadcrumbRoot.getInstance();
-    BRoot.updateGroupItemCount(props.id, count);
-  }, [props.id, state.items]);
+    BRoot.updateGroupItemCount(props.id, links.length);
+  }, [props.id, links]);
 
   return (
     <BreadcrumbContext.Provider value={contextValue}>
