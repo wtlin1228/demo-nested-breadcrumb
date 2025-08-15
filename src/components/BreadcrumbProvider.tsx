@@ -1,12 +1,15 @@
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import { useMatches } from '@tanstack/react-router';
 import React from 'react';
+import { createPortal } from 'react-dom';
 
 interface BItem {
   id: string;
+  node: React.ReactNode;
 }
 
 interface TBreadcrumbContext {
   addBreadcrumbItem: (item: BItem) => void;
-  removeBreadcrumbItem: (id: BItem['id']) => void;
 }
 
 const BreadcrumbContext = React.createContext<TBreadcrumbContext | null>(null);
@@ -21,45 +24,44 @@ export const useBreadcrumbContext = () => {
   return context;
 };
 
+export const useResigterBreadcrumb = (item: BItem) => {
+  const { addBreadcrumbItem } = useBreadcrumbContext();
+
+  React.useEffect(() => {
+    addBreadcrumbItem(item);
+  }, [addBreadcrumbItem]);
+};
+
 type State = {
-  items: BItem[];
+  items: Record<string, BItem>;
 };
 
 const defaultState: State = {
-  items: [],
+  items: {},
 };
 
-type Action =
-  | {
-      type: 'ADD_BREADCRUMB_ITEM';
-      payload: BItem;
-    }
-  | {
-      type: 'REMOVE_BREADCRUMB_ITEM';
-      payload: { id: BItem['id'] };
-    };
+type Action = {
+  type: 'ADD_BREADCRUMB_ITEM';
+  payload: BItem;
+};
 
 const reducer = (state: State, action: Action) => {
   const { type, payload } = action;
 
   switch (type) {
     case 'ADD_BREADCRUMB_ITEM':
-      state.items = [...state.items, payload];
-      return state;
-    case 'REMOVE_BREADCRUMB_ITEM':
-      state.items = state.items.filter((item) => item.id !== payload.id);
-      return state;
+      const nextState = { items: { ...state.items, [payload.id]: payload } };
+      return nextState;
     default:
       return state;
   }
 };
 
-export const BreadcrumbProvider: React.FC<React.PropsWithChildren> = (
-  props,
-) => {
+export const BreadcrumbProvider: React.FC<
+  React.PropsWithChildren<{ id: string }>
+> = (props) => {
   const [state, dispatch] = React.useReducer(reducer, defaultState);
-
-  console.log(state);
+  const matches = useMatches();
 
   const contextValue: TBreadcrumbContext = React.useMemo(
     () => ({
@@ -68,20 +70,29 @@ export const BreadcrumbProvider: React.FC<React.PropsWithChildren> = (
           type: 'ADD_BREADCRUMB_ITEM',
           payload: item,
         }),
-      removeBreadcrumbItem: (id) =>
-        dispatch({
-          type: 'REMOVE_BREADCRUMB_ITEM',
-          payload: {
-            id,
-          },
-        }),
     }),
     [],
   );
 
+  const links = React.useMemo(
+    () =>
+      matches.reduce<React.ReactNode[]>((acc, curr) => {
+        const item = state.items[curr.id];
+        if (item) {
+          acc.push(item.node);
+        }
+        return acc;
+      }, []),
+    [matches, state.items],
+  );
+
+  // TODO: need to deal with if the container hasn't been created yet
+  const el = document.getElementById(props.id);
+
   return (
     <BreadcrumbContext.Provider value={contextValue}>
       {props.children}
+      {el && createPortal(<Breadcrumbs>{links}</Breadcrumbs>, el)}
     </BreadcrumbContext.Provider>
   );
 };

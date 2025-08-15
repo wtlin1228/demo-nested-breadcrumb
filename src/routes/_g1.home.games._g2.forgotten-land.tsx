@@ -1,5 +1,7 @@
 import Typography from '@mui/material/Typography';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
+import { useResigterBreadcrumb } from '../components/BreadcrumbProvider';
+import { Link } from '../components/Link';
 
 export const Route = createFileRoute('/_g1/home/games/_g2/forgotten-land')({
   component: RouteComponent,
@@ -12,6 +14,11 @@ export const Route = createFileRoute('/_g1/home/games/_g2/forgotten-land')({
 });
 
 function RouteComponent() {
+  useResigterBreadcrumb({
+    id: Route.id,
+    node: <Link to="/home/games/forgotten-land">Forgotten Land</Link>,
+  });
+
   return (
     <div>
       <Typography variant="h4">Forgotten Land</Typography>
