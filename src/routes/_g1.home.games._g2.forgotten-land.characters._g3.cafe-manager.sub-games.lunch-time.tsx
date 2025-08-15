@@ -19,7 +19,10 @@ function RouteComponent() {
   useResigterBreadcrumb({
     id: Route.id,
     node: (
-      <Link to="/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time">
+      <Link
+        key={Route.id}
+        to="/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time"
+      >
         Lunch Time
       </Link>
     ),

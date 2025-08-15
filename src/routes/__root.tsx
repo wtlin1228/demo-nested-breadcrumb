@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 export const Route = createRootRoute({
   component: () => (
     <>
-      <Box sx={{ minHeight: 100 }}>
+      <Box id="breadcrumb-root" sx={{ minHeight: 100 }}>
         {/* TODO: create those containers based dynamically */}
         <div id="g1"></div>
         <div id="g2"></div>

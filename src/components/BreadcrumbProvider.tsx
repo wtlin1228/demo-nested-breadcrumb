@@ -61,6 +61,7 @@ export const BreadcrumbProvider: React.FC<
   React.PropsWithChildren<{ id: string }>
 > = (props) => {
   const [state, dispatch] = React.useReducer(reducer, defaultState);
+  const [container, setContainer] = React.useState<HTMLElement | null>(null);
   const matches = useMatches();
 
   const contextValue: TBreadcrumbContext = React.useMemo(
@@ -86,13 +87,30 @@ export const BreadcrumbProvider: React.FC<
     [matches, state.items],
   );
 
-  // TODO: need to deal with if the container hasn't been created yet
-  const el = document.getElementById(props.id);
+  React.useEffect(() => {
+    // TODO: get the root dynamically
+    const targetNode = document.getElementById('breadcrumb-root')!;
+
+    const callback = (mutationList: MutationRecord[]) => {
+      for (const mutation of mutationList) {
+        if (mutation.type === 'childList') {
+          setContainer(document.getElementById(props.id));
+        }
+      }
+    };
+
+    const observer = new MutationObserver(callback);
+
+    observer.observe(targetNode, { childList: true });
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <BreadcrumbContext.Provider value={contextValue}>
       {props.children}
-      {el && createPortal(<Breadcrumbs>{links}</Breadcrumbs>, el)}
+      {container && createPortal(<Breadcrumbs>{links}</Breadcrumbs>, container)}
     </BreadcrumbContext.Provider>
   );
 };

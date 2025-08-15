@@ -16,7 +16,11 @@ export const Route = createFileRoute('/_g1/home/games')({
 function RouteComponent() {
   useResigterBreadcrumb({
     id: Route.id,
-    node: <Link to="/home/games">Games</Link>,
+    node: (
+      <Link key={Route.id} to="/home/games">
+        Games
+      </Link>
+    ),
   });
 
   return (
