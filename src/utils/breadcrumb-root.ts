@@ -3,7 +3,7 @@ interface BGroup {
   itemCount: number;
 }
 
-interface VisibilityControl {
+export interface VisibilityControl {
   shouldCollapse: boolean;
 }
 
@@ -70,7 +70,14 @@ export class BreadcrumbRoot implements TBreadcrumbRoot {
   private visibilityListeners: Map<BGroup['id'], VisibilityListener> =
     new Map();
 
-  constructor() {}
+  // Just a way to do singleton
+  private static instance: BreadcrumbRoot | null = null;
+  public static getInstance(): BreadcrumbRoot {
+    if (!BreadcrumbRoot.instance) {
+      BreadcrumbRoot.instance = new BreadcrumbRoot();
+    }
+    return BreadcrumbRoot.instance;
+  }
 
   private static groupFactory(id: BGroup['id']): BGroup {
     return {
@@ -125,6 +132,10 @@ export class BreadcrumbRoot implements TBreadcrumbRoot {
   /* -------------------------------------------------------------------------- */
   private notifyVisibilityChange(): void {
     // TODO: implement it later
+    console.log('unimplemented: control the visibility for each BGroup');
+    for (const [key, value] of this.groupMap) {
+      console.log(`group-${key} has ${value.itemCount} items`);
+    }
   }
 
   public subscribeToVisibilityChange(

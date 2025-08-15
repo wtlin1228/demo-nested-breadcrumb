@@ -2,6 +2,10 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { useMatches } from '@tanstack/react-router';
 import React from 'react';
 import { createPortal } from 'react-dom';
+import {
+  BreadcrumbRoot,
+  type VisibilityControl,
+} from '../utils/breadcrumb-root';
 
 interface BItem {
   id: string;
@@ -61,7 +65,11 @@ export const BreadcrumbProvider: React.FC<
   React.PropsWithChildren<{ id: string }>
 > = (props) => {
   const [state, dispatch] = React.useReducer(reducer, defaultState);
+
   const [container, setContainer] = React.useState<HTMLElement | null>(null);
+  const [visibilityControl, setVisibilityControl] =
+    React.useState<VisibilityControl | null>(null);
+
   const matches = useMatches();
 
   const contextValue: TBreadcrumbContext = React.useMemo(
@@ -88,7 +96,6 @@ export const BreadcrumbProvider: React.FC<
   );
 
   React.useEffect(() => {
-    // TODO: get the root dynamically
     const targetNode = document.getElementById('breadcrumb-root')!;
 
     const callback = (mutationList: MutationRecord[]) => {
@@ -105,12 +112,33 @@ export const BreadcrumbProvider: React.FC<
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [props.id]);
+
+  React.useEffect(() => {
+    const BRoot = BreadcrumbRoot.getInstance();
+    BRoot.subscribeToVisibilityChange(props.id, setVisibilityControl);
+
+    return () => {
+      BRoot.unsubscribeToVisibilityChange(props.id);
+    };
+  }, [props.id]);
+
+  React.useEffect(() => {
+    const count = Object.keys(state.items).length;
+    const BRoot = BreadcrumbRoot.getInstance();
+    BRoot.updateGroupItemCount(props.id, count);
+  }, [props.id, state.items]);
 
   return (
     <BreadcrumbContext.Provider value={contextValue}>
       {props.children}
-      {container && createPortal(<Breadcrumbs>{links}</Breadcrumbs>, container)}
+      {container &&
+        createPortal(
+          // TODO: change the breadcrumb UI based on the
+          // visibilityControl coming from BRoot.
+          <Breadcrumbs>{links}</Breadcrumbs>,
+          container,
+        )}
     </BreadcrumbContext.Provider>
   );
 };
