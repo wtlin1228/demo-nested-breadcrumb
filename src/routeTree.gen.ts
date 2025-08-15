@@ -9,18 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as HomeRouteImport } from './routes/home'
+import { Route as G1RouteImport } from './routes/_g1'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as HomeGamesRouteImport } from './routes/home.games'
-import { Route as HomeGamesForgottenLandRouteImport } from './routes/home.games.forgotten-land'
-import { Route as HomeGamesForgottenLandCharactersRouteImport } from './routes/home.games.forgotten-land.characters'
-import { Route as HomeGamesForgottenLandCharactersCafeManagerRouteImport } from './routes/home.games.forgotten-land.characters.cafe-manager'
-import { Route as HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteImport } from './routes/home.games.forgotten-land.characters.cafe-manager.sub-games'
-import { Route as HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRouteImport } from './routes/home.games.forgotten-land.characters.cafe-manager.sub-games.lunch-time'
+import { Route as G1HomeRouteImport } from './routes/_g1.home'
+import { Route as G1HomeGamesRouteImport } from './routes/_g1.home.games'
+import { Route as G1HomeGamesG2RouteImport } from './routes/_g1.home.games._g2'
+import { Route as G1HomeGamesG2ForgottenLandRouteImport } from './routes/_g1.home.games._g2.forgotten-land'
+import { Route as G1HomeGamesG2ForgottenLandCharactersRouteImport } from './routes/_g1.home.games._g2.forgotten-land.characters'
+import { Route as G1HomeGamesG2ForgottenLandCharactersG3RouteImport } from './routes/_g1.home.games._g2.forgotten-land.characters._g3'
+import { Route as G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteImport } from './routes/_g1.home.games._g2.forgotten-land.characters._g3.cafe-manager'
+import { Route as G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteImport } from './routes/_g1.home.games._g2.forgotten-land.characters._g3.cafe-manager.sub-games'
+import { Route as G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRouteImport } from './routes/_g1.home.games._g2.forgotten-land.characters._g3.cafe-manager.sub-games.lunch-time'
 
-const HomeRoute = HomeRouteImport.update({
-  id: '/home',
-  path: '/home',
+const G1Route = G1RouteImport.update({
+  id: '/_g1',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -28,74 +30,93 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HomeGamesRoute = HomeGamesRouteImport.update({
+const G1HomeRoute = G1HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => G1Route,
+} as any)
+const G1HomeGamesRoute = G1HomeGamesRouteImport.update({
   id: '/games',
   path: '/games',
-  getParentRoute: () => HomeRoute,
+  getParentRoute: () => G1HomeRoute,
 } as any)
-const HomeGamesForgottenLandRoute = HomeGamesForgottenLandRouteImport.update({
-  id: '/forgotten-land',
-  path: '/forgotten-land',
-  getParentRoute: () => HomeGamesRoute,
+const G1HomeGamesG2Route = G1HomeGamesG2RouteImport.update({
+  id: '/_g2',
+  getParentRoute: () => G1HomeGamesRoute,
 } as any)
-const HomeGamesForgottenLandCharactersRoute =
-  HomeGamesForgottenLandCharactersRouteImport.update({
+const G1HomeGamesG2ForgottenLandRoute =
+  G1HomeGamesG2ForgottenLandRouteImport.update({
+    id: '/forgotten-land',
+    path: '/forgotten-land',
+    getParentRoute: () => G1HomeGamesG2Route,
+  } as any)
+const G1HomeGamesG2ForgottenLandCharactersRoute =
+  G1HomeGamesG2ForgottenLandCharactersRouteImport.update({
     id: '/characters',
     path: '/characters',
-    getParentRoute: () => HomeGamesForgottenLandRoute,
+    getParentRoute: () => G1HomeGamesG2ForgottenLandRoute,
   } as any)
-const HomeGamesForgottenLandCharactersCafeManagerRoute =
-  HomeGamesForgottenLandCharactersCafeManagerRouteImport.update({
+const G1HomeGamesG2ForgottenLandCharactersG3Route =
+  G1HomeGamesG2ForgottenLandCharactersG3RouteImport.update({
+    id: '/_g3',
+    getParentRoute: () => G1HomeGamesG2ForgottenLandCharactersRoute,
+  } as any)
+const G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRoute =
+  G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteImport.update({
     id: '/cafe-manager',
     path: '/cafe-manager',
-    getParentRoute: () => HomeGamesForgottenLandCharactersRoute,
+    getParentRoute: () => G1HomeGamesG2ForgottenLandCharactersG3Route,
   } as any)
-const HomeGamesForgottenLandCharactersCafeManagerSubGamesRoute =
-  HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteImport.update({
+const G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRoute =
+  G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteImport.update({
     id: '/sub-games',
     path: '/sub-games',
-    getParentRoute: () => HomeGamesForgottenLandCharactersCafeManagerRoute,
+    getParentRoute: () =>
+      G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRoute,
   } as any)
-const HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRoute =
-  HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRouteImport.update(
+const G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRoute =
+  G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRouteImport.update(
     {
       id: '/lunch-time',
       path: '/lunch-time',
       getParentRoute: () =>
-        HomeGamesForgottenLandCharactersCafeManagerSubGamesRoute,
+        G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRoute,
     } as any,
   )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/home': typeof HomeRouteWithChildren
-  '/home/games': typeof HomeGamesRouteWithChildren
-  '/home/games/forgotten-land': typeof HomeGamesForgottenLandRouteWithChildren
-  '/home/games/forgotten-land/characters': typeof HomeGamesForgottenLandCharactersRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager': typeof HomeGamesForgottenLandCharactersCafeManagerRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager/sub-games': typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time': typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRoute
+  '/home': typeof G1HomeRouteWithChildren
+  '/home/games': typeof G1HomeGamesG2RouteWithChildren
+  '/home/games/forgotten-land': typeof G1HomeGamesG2ForgottenLandRouteWithChildren
+  '/home/games/forgotten-land/characters': typeof G1HomeGamesG2ForgottenLandCharactersG3RouteWithChildren
+  '/home/games/forgotten-land/characters/cafe-manager': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteWithChildren
+  '/home/games/forgotten-land/characters/cafe-manager/sub-games': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteWithChildren
+  '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/home': typeof HomeRouteWithChildren
-  '/home/games': typeof HomeGamesRouteWithChildren
-  '/home/games/forgotten-land': typeof HomeGamesForgottenLandRouteWithChildren
-  '/home/games/forgotten-land/characters': typeof HomeGamesForgottenLandCharactersRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager': typeof HomeGamesForgottenLandCharactersCafeManagerRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager/sub-games': typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time': typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRoute
+  '/home': typeof G1HomeRouteWithChildren
+  '/home/games': typeof G1HomeGamesG2RouteWithChildren
+  '/home/games/forgotten-land': typeof G1HomeGamesG2ForgottenLandRouteWithChildren
+  '/home/games/forgotten-land/characters': typeof G1HomeGamesG2ForgottenLandCharactersG3RouteWithChildren
+  '/home/games/forgotten-land/characters/cafe-manager': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteWithChildren
+  '/home/games/forgotten-land/characters/cafe-manager/sub-games': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteWithChildren
+  '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/home': typeof HomeRouteWithChildren
-  '/home/games': typeof HomeGamesRouteWithChildren
-  '/home/games/forgotten-land': typeof HomeGamesForgottenLandRouteWithChildren
-  '/home/games/forgotten-land/characters': typeof HomeGamesForgottenLandCharactersRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager': typeof HomeGamesForgottenLandCharactersCafeManagerRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager/sub-games': typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteWithChildren
-  '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time': typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRoute
+  '/_g1': typeof G1RouteWithChildren
+  '/_g1/home': typeof G1HomeRouteWithChildren
+  '/_g1/home/games': typeof G1HomeGamesRouteWithChildren
+  '/_g1/home/games/_g2': typeof G1HomeGamesG2RouteWithChildren
+  '/_g1/home/games/_g2/forgotten-land': typeof G1HomeGamesG2ForgottenLandRouteWithChildren
+  '/_g1/home/games/_g2/forgotten-land/characters': typeof G1HomeGamesG2ForgottenLandCharactersRouteWithChildren
+  '/_g1/home/games/_g2/forgotten-land/characters/_g3': typeof G1HomeGamesG2ForgottenLandCharactersG3RouteWithChildren
+  '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteWithChildren
+  '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager/sub-games': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteWithChildren
+  '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager/sub-games/lunch-time': typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,27 +142,30 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/home'
-    | '/home/games'
-    | '/home/games/forgotten-land'
-    | '/home/games/forgotten-land/characters'
-    | '/home/games/forgotten-land/characters/cafe-manager'
-    | '/home/games/forgotten-land/characters/cafe-manager/sub-games'
-    | '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time'
+    | '/_g1'
+    | '/_g1/home'
+    | '/_g1/home/games'
+    | '/_g1/home/games/_g2'
+    | '/_g1/home/games/_g2/forgotten-land'
+    | '/_g1/home/games/_g2/forgotten-land/characters'
+    | '/_g1/home/games/_g2/forgotten-land/characters/_g3'
+    | '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager'
+    | '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager/sub-games'
+    | '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager/sub-games/lunch-time'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  HomeRoute: typeof HomeRouteWithChildren
+  G1Route: typeof G1RouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/home': {
-      id: '/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof HomeRouteImport
+    '/_g1': {
+      id: '/_g1'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof G1RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -151,136 +175,195 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/home/games': {
-      id: '/home/games'
+    '/_g1/home': {
+      id: '/_g1/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof G1HomeRouteImport
+      parentRoute: typeof G1Route
+    }
+    '/_g1/home/games': {
+      id: '/_g1/home/games'
       path: '/games'
       fullPath: '/home/games'
-      preLoaderRoute: typeof HomeGamesRouteImport
-      parentRoute: typeof HomeRoute
+      preLoaderRoute: typeof G1HomeGamesRouteImport
+      parentRoute: typeof G1HomeRoute
     }
-    '/home/games/forgotten-land': {
-      id: '/home/games/forgotten-land'
+    '/_g1/home/games/_g2': {
+      id: '/_g1/home/games/_g2'
+      path: ''
+      fullPath: '/home/games'
+      preLoaderRoute: typeof G1HomeGamesG2RouteImport
+      parentRoute: typeof G1HomeGamesRoute
+    }
+    '/_g1/home/games/_g2/forgotten-land': {
+      id: '/_g1/home/games/_g2/forgotten-land'
       path: '/forgotten-land'
       fullPath: '/home/games/forgotten-land'
-      preLoaderRoute: typeof HomeGamesForgottenLandRouteImport
-      parentRoute: typeof HomeGamesRoute
+      preLoaderRoute: typeof G1HomeGamesG2ForgottenLandRouteImport
+      parentRoute: typeof G1HomeGamesG2Route
     }
-    '/home/games/forgotten-land/characters': {
-      id: '/home/games/forgotten-land/characters'
+    '/_g1/home/games/_g2/forgotten-land/characters': {
+      id: '/_g1/home/games/_g2/forgotten-land/characters'
       path: '/characters'
       fullPath: '/home/games/forgotten-land/characters'
-      preLoaderRoute: typeof HomeGamesForgottenLandCharactersRouteImport
-      parentRoute: typeof HomeGamesForgottenLandRoute
+      preLoaderRoute: typeof G1HomeGamesG2ForgottenLandCharactersRouteImport
+      parentRoute: typeof G1HomeGamesG2ForgottenLandRoute
     }
-    '/home/games/forgotten-land/characters/cafe-manager': {
-      id: '/home/games/forgotten-land/characters/cafe-manager'
+    '/_g1/home/games/_g2/forgotten-land/characters/_g3': {
+      id: '/_g1/home/games/_g2/forgotten-land/characters/_g3'
+      path: ''
+      fullPath: '/home/games/forgotten-land/characters'
+      preLoaderRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3RouteImport
+      parentRoute: typeof G1HomeGamesG2ForgottenLandCharactersRoute
+    }
+    '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager': {
+      id: '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager'
       path: '/cafe-manager'
       fullPath: '/home/games/forgotten-land/characters/cafe-manager'
-      preLoaderRoute: typeof HomeGamesForgottenLandCharactersCafeManagerRouteImport
-      parentRoute: typeof HomeGamesForgottenLandCharactersRoute
+      preLoaderRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteImport
+      parentRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3Route
     }
-    '/home/games/forgotten-land/characters/cafe-manager/sub-games': {
-      id: '/home/games/forgotten-land/characters/cafe-manager/sub-games'
+    '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager/sub-games': {
+      id: '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager/sub-games'
       path: '/sub-games'
       fullPath: '/home/games/forgotten-land/characters/cafe-manager/sub-games'
-      preLoaderRoute: typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteImport
-      parentRoute: typeof HomeGamesForgottenLandCharactersCafeManagerRoute
+      preLoaderRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteImport
+      parentRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRoute
     }
-    '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time': {
-      id: '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time'
+    '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager/sub-games/lunch-time': {
+      id: '/_g1/home/games/_g2/forgotten-land/characters/_g3/cafe-manager/sub-games/lunch-time'
       path: '/lunch-time'
       fullPath: '/home/games/forgotten-land/characters/cafe-manager/sub-games/lunch-time'
-      preLoaderRoute: typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRouteImport
-      parentRoute: typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesRoute
+      preLoaderRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRouteImport
+      parentRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRoute
     }
   }
 }
 
-interface HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteChildren {
-  HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRoute: typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRoute
+interface G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteChildren {
+  G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRoute
 }
 
-const HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteChildren: HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteChildren =
+const G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteChildren: G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteChildren =
   {
-    HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRoute:
-      HomeGamesForgottenLandCharactersCafeManagerSubGamesLunchTimeRoute,
+    G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRoute:
+      G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesLunchTimeRoute,
   }
 
-const HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteWithChildren =
-  HomeGamesForgottenLandCharactersCafeManagerSubGamesRoute._addFileChildren(
-    HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteChildren,
+const G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteWithChildren =
+  G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRoute._addFileChildren(
+    G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteChildren,
   )
 
-interface HomeGamesForgottenLandCharactersCafeManagerRouteChildren {
-  HomeGamesForgottenLandCharactersCafeManagerSubGamesRoute: typeof HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteWithChildren
+interface G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteChildren {
+  G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteWithChildren
 }
 
-const HomeGamesForgottenLandCharactersCafeManagerRouteChildren: HomeGamesForgottenLandCharactersCafeManagerRouteChildren =
+const G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteChildren: G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteChildren =
   {
-    HomeGamesForgottenLandCharactersCafeManagerSubGamesRoute:
-      HomeGamesForgottenLandCharactersCafeManagerSubGamesRouteWithChildren,
+    G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRoute:
+      G1HomeGamesG2ForgottenLandCharactersG3CafeManagerSubGamesRouteWithChildren,
   }
 
-const HomeGamesForgottenLandCharactersCafeManagerRouteWithChildren =
-  HomeGamesForgottenLandCharactersCafeManagerRoute._addFileChildren(
-    HomeGamesForgottenLandCharactersCafeManagerRouteChildren,
+const G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteWithChildren =
+  G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRoute._addFileChildren(
+    G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteChildren,
   )
 
-interface HomeGamesForgottenLandCharactersRouteChildren {
-  HomeGamesForgottenLandCharactersCafeManagerRoute: typeof HomeGamesForgottenLandCharactersCafeManagerRouteWithChildren
+interface G1HomeGamesG2ForgottenLandCharactersG3RouteChildren {
+  G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRoute: typeof G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteWithChildren
 }
 
-const HomeGamesForgottenLandCharactersRouteChildren: HomeGamesForgottenLandCharactersRouteChildren =
+const G1HomeGamesG2ForgottenLandCharactersG3RouteChildren: G1HomeGamesG2ForgottenLandCharactersG3RouteChildren =
   {
-    HomeGamesForgottenLandCharactersCafeManagerRoute:
-      HomeGamesForgottenLandCharactersCafeManagerRouteWithChildren,
+    G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRoute:
+      G1HomeGamesG2ForgottenLandCharactersG3CafeManagerRouteWithChildren,
   }
 
-const HomeGamesForgottenLandCharactersRouteWithChildren =
-  HomeGamesForgottenLandCharactersRoute._addFileChildren(
-    HomeGamesForgottenLandCharactersRouteChildren,
+const G1HomeGamesG2ForgottenLandCharactersG3RouteWithChildren =
+  G1HomeGamesG2ForgottenLandCharactersG3Route._addFileChildren(
+    G1HomeGamesG2ForgottenLandCharactersG3RouteChildren,
   )
 
-interface HomeGamesForgottenLandRouteChildren {
-  HomeGamesForgottenLandCharactersRoute: typeof HomeGamesForgottenLandCharactersRouteWithChildren
+interface G1HomeGamesG2ForgottenLandCharactersRouteChildren {
+  G1HomeGamesG2ForgottenLandCharactersG3Route: typeof G1HomeGamesG2ForgottenLandCharactersG3RouteWithChildren
 }
 
-const HomeGamesForgottenLandRouteChildren: HomeGamesForgottenLandRouteChildren =
+const G1HomeGamesG2ForgottenLandCharactersRouteChildren: G1HomeGamesG2ForgottenLandCharactersRouteChildren =
   {
-    HomeGamesForgottenLandCharactersRoute:
-      HomeGamesForgottenLandCharactersRouteWithChildren,
+    G1HomeGamesG2ForgottenLandCharactersG3Route:
+      G1HomeGamesG2ForgottenLandCharactersG3RouteWithChildren,
   }
 
-const HomeGamesForgottenLandRouteWithChildren =
-  HomeGamesForgottenLandRoute._addFileChildren(
-    HomeGamesForgottenLandRouteChildren,
+const G1HomeGamesG2ForgottenLandCharactersRouteWithChildren =
+  G1HomeGamesG2ForgottenLandCharactersRoute._addFileChildren(
+    G1HomeGamesG2ForgottenLandCharactersRouteChildren,
   )
 
-interface HomeGamesRouteChildren {
-  HomeGamesForgottenLandRoute: typeof HomeGamesForgottenLandRouteWithChildren
+interface G1HomeGamesG2ForgottenLandRouteChildren {
+  G1HomeGamesG2ForgottenLandCharactersRoute: typeof G1HomeGamesG2ForgottenLandCharactersRouteWithChildren
 }
 
-const HomeGamesRouteChildren: HomeGamesRouteChildren = {
-  HomeGamesForgottenLandRoute: HomeGamesForgottenLandRouteWithChildren,
+const G1HomeGamesG2ForgottenLandRouteChildren: G1HomeGamesG2ForgottenLandRouteChildren =
+  {
+    G1HomeGamesG2ForgottenLandCharactersRoute:
+      G1HomeGamesG2ForgottenLandCharactersRouteWithChildren,
+  }
+
+const G1HomeGamesG2ForgottenLandRouteWithChildren =
+  G1HomeGamesG2ForgottenLandRoute._addFileChildren(
+    G1HomeGamesG2ForgottenLandRouteChildren,
+  )
+
+interface G1HomeGamesG2RouteChildren {
+  G1HomeGamesG2ForgottenLandRoute: typeof G1HomeGamesG2ForgottenLandRouteWithChildren
 }
 
-const HomeGamesRouteWithChildren = HomeGamesRoute._addFileChildren(
-  HomeGamesRouteChildren,
+const G1HomeGamesG2RouteChildren: G1HomeGamesG2RouteChildren = {
+  G1HomeGamesG2ForgottenLandRoute: G1HomeGamesG2ForgottenLandRouteWithChildren,
+}
+
+const G1HomeGamesG2RouteWithChildren = G1HomeGamesG2Route._addFileChildren(
+  G1HomeGamesG2RouteChildren,
 )
 
-interface HomeRouteChildren {
-  HomeGamesRoute: typeof HomeGamesRouteWithChildren
+interface G1HomeGamesRouteChildren {
+  G1HomeGamesG2Route: typeof G1HomeGamesG2RouteWithChildren
 }
 
-const HomeRouteChildren: HomeRouteChildren = {
-  HomeGamesRoute: HomeGamesRouteWithChildren,
+const G1HomeGamesRouteChildren: G1HomeGamesRouteChildren = {
+  G1HomeGamesG2Route: G1HomeGamesG2RouteWithChildren,
 }
 
-const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren)
+const G1HomeGamesRouteWithChildren = G1HomeGamesRoute._addFileChildren(
+  G1HomeGamesRouteChildren,
+)
+
+interface G1HomeRouteChildren {
+  G1HomeGamesRoute: typeof G1HomeGamesRouteWithChildren
+}
+
+const G1HomeRouteChildren: G1HomeRouteChildren = {
+  G1HomeGamesRoute: G1HomeGamesRouteWithChildren,
+}
+
+const G1HomeRouteWithChildren =
+  G1HomeRoute._addFileChildren(G1HomeRouteChildren)
+
+interface G1RouteChildren {
+  G1HomeRoute: typeof G1HomeRouteWithChildren
+}
+
+const G1RouteChildren: G1RouteChildren = {
+  G1HomeRoute: G1HomeRouteWithChildren,
+}
+
+const G1RouteWithChildren = G1Route._addFileChildren(G1RouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  HomeRoute: HomeRouteWithChildren,
+  G1Route: G1RouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

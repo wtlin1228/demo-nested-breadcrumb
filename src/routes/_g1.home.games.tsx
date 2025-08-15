@@ -1,22 +1,20 @@
 import Typography from '@mui/material/Typography';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
-export const Route = createFileRoute(
-  '/home/games/forgotten-land/characters/cafe-manager',
-)({
+export const Route = createFileRoute('/_g1/home/games')({
   component: RouteComponent,
   onEnter: () => {
-    console.log('CafeManager::onEnter');
+    console.log('Games::onEnter');
   },
   onLeave: () => {
-    console.log('CafeManager::onLeave');
+    console.log('Games::onLeave');
   },
 });
 
 function RouteComponent() {
   return (
     <div>
-      <Typography variant="h4">Café Manager</Typography>
+      <Typography variant="h4">Games</Typography>
       <Outlet />
     </div>
   );

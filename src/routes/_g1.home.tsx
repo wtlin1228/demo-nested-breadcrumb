@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/home')({
+export const Route = createFileRoute('/_g1/home')({
   component: RouteComponent,
   onEnter: () => {
     console.log('Home::onEnter');
