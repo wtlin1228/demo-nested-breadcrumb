@@ -71,7 +71,7 @@ One approach is to use a `MutationObserver` to watch the child list of the conta
 
 Here, `app1` renders `app2`, and `app2` renders `app3`. To maintain the correct order, each container should be registered before rendering the next app.
 
-# Setup
+## Setup
 
 Install the dependencies:
 
@@ -79,7 +79,7 @@ Install the dependencies:
 pnpm install
 ```
 
-## Get started
+### Get started
 
 Start the dev server, and the app will be available at [http://localhost:3000](http://localhost:3000).
 
