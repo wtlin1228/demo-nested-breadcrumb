@@ -51,7 +51,8 @@ Before rendering the `<Breadcrumbs>` UI, we must ensure the corresponding contai
 <div id="breadcrumbs-container-root">
   <div id="app1-breadcrumbs-container"></div>
   <div id="app2-breadcrumbs-container"></div>
-  <div id="app3-breadcrumbs-container"></div>
+  <!-- ❌ app3's container is not ready yet -->
+  <!-- <div id="app3-breadcrumbs-container"></div> -->
 </div>
 ```
 
@@ -62,7 +63,7 @@ One approach is to use a `MutationObserver` to watch the child list of the conta
 ```html
 <div id="breadcrumbs-container-root">
   <div id="app1-breadcrumbs-container" />
-  <!-- ❌ app3 should appear after app2 -->
+  <!-- ❌ app3's container should appear after app2's -->
   <div id="app3-breadcrumbs-container" />
   <div id="app2-breadcrumbs-container" />
 </div>
