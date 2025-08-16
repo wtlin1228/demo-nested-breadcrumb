@@ -2,9 +2,9 @@
 
 This demo demonstrates one approach to implementing breadcrumbs in a **multi-router micro-frontend** architecture.
 
-In a typical single-router application, breadcrumbs are straightforward, they’re essentially a subset of the route hierarchy. You simply get the matched routes, map them to human-readable text, and handle i18n or state updates like any other UI component.
+In a typical single-router application, breadcrumbs are straightforward, they’re essentially a subset of the route hierarchy. We simply get the matched routes, map them to human-readable text, and handle i18n or state updates like any other UI component.
 
-However, in a **multi-router micro-frontend** setup, things change. You can’t assume that every micro-frontend shares the same routing library, UI framework, or data-fetching approach, and even if they use the same libraries, their versions may differ.
+However, in a **multi-router micro-frontend** setup, things change. We can’t assume that every micro-frontend shares the same routing library, UI framework, or data-fetching approach, and even if they use the same libraries, their versions may differ.
 
 ## Key components
 
