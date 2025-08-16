@@ -26,7 +26,7 @@ flowchart LR
     end
     subgraph Host
         R[BRoot]
-        C(Container Renderer)
+        C(Container Root)
     end
     S -->|1.initiate a BRoot| R
     C -->|2.subscribe to groups change| R
@@ -40,6 +40,35 @@ flowchart LR
     R --->|10.notify| G
     G -->|11.rerender| B
 ```
+
+## Challenges and considerations
+
+### Ensuring the container is ready
+
+Before rendering the `<Breadcrumbs>` UI, we must ensure the corresponding container exists and is ready:
+
+```html
+<div id="breadcrumbs-container-root">
+  <div id="app1-breadcrumbs-container"></div>
+  <div id="app2-breadcrumbs-container"></div>
+  <div id="app3-breadcrumbs-container"></div>
+</div>
+```
+
+One approach is to use a `MutationObserver` to watch the child list of the container root and wait until the target container is available.
+
+### Preserving the correct registration order
+
+```html
+<div id="breadcrumbs-container-root">
+  <div id="app1-breadcrumbs-container" />
+  <!-- ❌ app3 should appear after app2 -->
+  <div id="app3-breadcrumbs-container" />
+  <div id="app2-breadcrumbs-container" />
+</div>
+```
+
+Here, `app1` renders `app2`, and `app2` renders `app3`. To maintain the correct order, each container should be registered before rendering the next app.
 
 # Setup
 
