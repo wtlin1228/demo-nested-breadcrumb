@@ -14,7 +14,7 @@ To address this challenge, the solution is built around three core concepts:
 - **BGroup** - A breadcrumb group. Manages the registration of `BItem` instances and syncs its item count back to `BRoot`.
 - **BItem** - A breadcrumb item. Represents a visible text label or clickable link, typically mapping directly to a UI component.
 
-## Protocol steps
+## Workflow steps
 
 ```mermaid
 flowchart LR
